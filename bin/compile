@@ -1,5 +1,7 @@
 #!/bin/bash
 
+basedir="$( cd -P "$( dirname "$0" )" && pwd )"
+
 # Set errors
 set -e
 
@@ -34,5 +36,5 @@ git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
 
 rm -r "$apt_deps_buildpack_dir"
 
-cp "/buildpack/bin/conf/site.conf" "/app/vendor/apache2/conf/tb-testbp.osc-fr1.scalingo.io.conf"
+cp "$basedir/conf/site.conf" "/app/vendor/apache2/conf/tb-testbp.osc-fr1.scalingo.io.conf"
 
