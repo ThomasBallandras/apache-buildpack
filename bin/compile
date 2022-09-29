@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Set errors
+set -e
+
+# set debug
+set -x
+
+# Configure directories
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+echo "Install Apache and deps with apt-buildpack"
+
+cat >> $BUILD_DIR/Aptfile <<EOF
+apache2
+libcjose0
+libhiredis0.14
+libapache2-mod-auth-openidc
+EOF
+
+apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
+
+# only the name is interesting, deleting the temp empty file
+rm "$apt_deps_buildpack_dir"
+
+APT_BUILDPACK_URL="${APT_BUILDPACK_URL:-https://github.com/Scalingo/apt-buildpack}"
+git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
+
+"${apt_deps_buildpack_dir}/bin/compile" "$BUILD_DIR" "$CACHE_DIR" "$ENV_DIR"
+
+rm -r "$apt_deps_buildpack_dir"
+
+# Install Apache2 and auth_open_idc dependencies
+# apt-get install -y apache2 libcjose0 libhiredis0.14 libapache2-mod-auth-openidc
+
+# Download and install libapacheé-mod-auth-open-idc
+# curl -L --output $CACHE_DIR/auth_open_idc.deb https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.4.11.3/libapache2-mod-auth-openidc_2.4.11.3-1.focal+1_amd64.deb
+
+# dpkg -i $CACHE_DIR/auth_open_idc.deb
