@@ -36,6 +36,15 @@ git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
 
 rm -r "$apt_deps_buildpack_dir"
 
+# copying the .apt content to the /app/vendor/apache2 tree
+mkdir -p "/app/vendor/apache2"
+
+#if [[ -f "/.apt" ]]; then
+  echo "copying .apt dir"
+  cp -RT "/.apt" "/app/vendor/apache2"
+#fi
+
+
 # copying the conf to the apache2 folder
 mkdir -p "/app/vendor/apache2/conf"
 mkdir -p "/app/vendor/apache2/logs"
@@ -43,4 +52,4 @@ mkdir -p "/app/vendor/apache2/logs"
 cp -r "$basedir/conf/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
 
 # starting apache
-# /etc/init.d/apache2 -f "/app/vendor/apache2/conf/httpd.conf" start
+# /etc/init.d/apache2 -c "/app/vendor/apache2/conf/httpd.conf" start
