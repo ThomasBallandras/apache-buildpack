@@ -5,8 +5,6 @@ basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 # Set errors
 set -e
 
-set -x
-
 # Configure directories
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -60,3 +58,5 @@ cp $BUILD_DIR/httpd.conf /app/vendor/apache2/conf/httpd.conf
 
 ls -la /app/vendor/apache2/usr/sbin/
 ls -la /app/vendor/apache2/conf
+
+export
