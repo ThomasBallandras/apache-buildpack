@@ -41,6 +41,7 @@ rm -r "$apt_deps_buildpack_dir"
 mkdir -p "/app/vendor/apache2/conf"
 mkdir -p "/app/vendor/apache2/logs"
 
+echo "Port: $PORT"
 #cp -r "/buildpack/conf/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
 
 # starting apache
