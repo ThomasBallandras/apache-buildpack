@@ -12,16 +12,16 @@ ENV_DIR=$3
 
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-/app/vendor/apache2/logs}"
 
-if [ "$APACHE_MODE" = "openidc" ] ; then
-  echo "Install Apache and deps with apt-buildpack"
+#if [ "$APACHE_MODE" = "openidc" ] ; then
+echo "Install Apache and deps with apt-buildpack"
 
-  cat >> $BUILD_DIR/Aptfile <<EOF
-  apache2
-  libcjose0
-  libhiredis0.14
-  libapache2-mod-auth-openidc
-  EOF
-fi
+cat >> $BUILD_DIR/Aptfile <<EOF
+apache2
+libcjose0
+libhiredis0.14
+libapache2-mod-auth-openidc
+EOF
+#fi
 
 apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
 
@@ -43,6 +43,8 @@ mkdir -p "/app/vendor/apache2/logs"
 echo "My Var: $MYVAR"
 echo "Port: $PORT"
 #cp -r "/buildpack/conf/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
+
+chmod +x "$BUILD_DIR/.apt/usr/sbin/apache2"
 
 # starting apache
 #/build/.apt/usr/sbin/apache2 -f "/app/vendor/apache2/conf/httpd.conf"
