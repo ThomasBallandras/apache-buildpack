@@ -10,6 +10,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
+export APACHE_DIR="${APACHE_DIR:-/app/vendor/apache2}"
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-/app/vendor/apache2/logs}"
 
 if [ ! -f $BUILD_DIR/httpd.conf ] ; then
@@ -43,20 +44,18 @@ git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
 
 rm -r "$apt_deps_buildpack_dir"
 
-mkdir -p "/app/vendor/apache2/logs"
-mkdir -p "/app/vendor/apache2/conf"
-
-export PATH="/app/vendor/apache2/usr/sbin:$PATH"
+mkdir -p "$APACHE_DIR/logs"
+mkdir -p "$APACHE_DIR/conf"
 
 # copying the conf to the apache2 folder
 
-cp -R $BUILD_DIR/.apt/* /app/vendor/apache2/
+cp -R $BUILD_DIR/.apt/* $APACHE_DIR
 
-cp $BUILD_DIR/httpd.conf /app/vendor/apache2/conf/httpd.conf
+cp $BUILD_DIR/httpd.conf $APACHE_DIR/conf/httpd.conf
 
 #mkdir -p "/app/vendor/apache2/logs"
 
-ls -la /app/vendor/apache2/usr/sbin/
-ls -la /app/vendor/apache2/conf
+ls -la $APACHE_DIR/usr/sbin/
+ls -la $APACHE_DIR/conf
 
 export
