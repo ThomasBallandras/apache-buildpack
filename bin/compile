@@ -58,3 +58,5 @@ cp $BUILD_DIR/httpd.conf $APACHE_DIR/conf/httpd.conf
 export
 
 erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
+
+cat $APACHE_DIR/conf/httpd.conf
