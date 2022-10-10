@@ -37,6 +37,7 @@ git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
 rm -r "$apt_deps_buildpack_dir"
 
 mkdir -p "/app/vendor/apache2/logs"
+mkdir -p "/app/vendor/apache2/conf"
 
 # copying the conf to the apache2 folder
 
