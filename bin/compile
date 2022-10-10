@@ -38,7 +38,7 @@ rm -r "$apt_deps_buildpack_dir"
 
 
 # copying the conf to the apache2 folder
-ls -la $BUILD_DIR
+ls -la $BUILD_DIR/.apt/
 #cp -r "$BUILD_DIR/.apt/*" "/app/vendor/apache2/"
 #mkdir -p "/app/vendor/apache2/logs"
 
