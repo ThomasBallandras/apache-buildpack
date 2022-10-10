@@ -44,10 +44,13 @@ cp -r $BUILD_DIR/.apt/etc /app/vendor/apache2/
 cp -r $BUILD_DIR/.apt/lib /app/vendor/apache2/
 cp -r $BUILD_DIR/.apt/usr /app/vendor/apache2/
 cp -r $BUILD_DIR/.apt/var /app/vendor/apache2/
+
+cp $BUILD_DIR/httpd.conf /app/vendor/apache2/conf/httpd.conf
+
 #mkdir -p "/app/vendor/apache2/logs"
 chmod +x /app/vendor/apache2/usr/sbin/apache2
 ls -la /app/vendor/apache2/usr/sbin/
-#cp -r "$BUILD_DIR/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
+
 
 # starting apache
 #/build/.apt/usr/sbin/apache2 -f "/app/vendor/apache2/conf/httpd.conf"
