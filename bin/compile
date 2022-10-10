@@ -60,3 +60,5 @@ export
 erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
 
 cat $APACHE_DIR/conf/httpd.conf
+
+ls -la /app/vendor/apache2/usr/lib/apache2/modules/
