@@ -2,11 +2,4 @@
 
 BUILD_DIR=$1
 
-cat << EOF
----
-addons:
-config_vars:
-  PATH: /app/bin:/app/vendor/apache2/sbin:/usr/local/bin:/usr/bin:/bin
-default_process_types:
-  web: $BUILD_DIR/.apt/usr/sbin/apache2 -f "$BUILD_DIR/httpd.conf"
-EOF
+web: $BUILD_DIR/.apt/usr/sbin/apache2 -f "$BUILD_DIR/httpd.conf"
