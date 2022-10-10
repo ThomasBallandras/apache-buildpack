@@ -14,7 +14,7 @@ ENV_DIR=$3
 
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-/app/vendor/apache2/logs}"
 
-if [ ! -f "$BUILD_DIR/httpd.conf" ] ; then
+if [ ! -f $BUILD_DIR/httpd.conf ] ; then
   echo "No httpd.conf file found in BUILD dir! Exiting..."
   exit 1
 fi
