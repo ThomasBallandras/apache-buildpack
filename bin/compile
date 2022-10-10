@@ -24,6 +24,10 @@ if [ "$APACHE_MODE" = "openidc" ] ; then
   echo "libapache2-mod-auth-openidc" >> $BUILD_DIR/Aptfile
 fi
 
+if [ "$APACHE_MODE" = "mellon" ] ; then
+  echo "libapache2-mod-auth-mellon" >> $BUILD_DIR/Aptfile
+fi
+
 apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
 
 # only the name is interesting, deleting the temp empty file
