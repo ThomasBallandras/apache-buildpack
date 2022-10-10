@@ -1,1 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+BUILD_DIR=$1
+
+cat <<EOF
+---
+config_vars:
+  
+EOF
+
+echo "default_process_types:"
+echo "  web: /app/vendor/apache2/usr/sbin/apache2 -f /app/vendor/apache2/conf/httpd.conf"
