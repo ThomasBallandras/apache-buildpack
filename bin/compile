@@ -5,6 +5,8 @@ basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 # Set errors
 set -e
 
+set -x
+
 # Configure directories
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -43,7 +45,7 @@ mkdir -p "/app/vendor/apache2/logs"
 echo "My Var: $MYVAR"
 echo "Port: $PORT"
 #cp -r "/buildpack/conf/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
-
+ls -la "$BUILD_DIR/.apt/usr/sbin/"
 chmod +x "$BUILD_DIR/.apt/usr/sbin/apache2"
 
 # starting apache
