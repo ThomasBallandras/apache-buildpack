@@ -13,7 +13,7 @@ ENV_DIR=$3
 export APACHE_DIR="${APACHE_DIR:-/app/vendor/apache2}"
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-/app/vendor/apache2/logs}"
 
-if [ ! -f $BUILD_DIR/httpd.conf ] ; then
+if [ ! [ -f $BUILD_DIR/httpd.conf ] || [ -f $BUILD_DIR/httpd.conf.erb ]] ; then
   echo "No httpd.conf file found in BUILD dir! Exiting..."
   exit 1
 fi
@@ -55,7 +55,6 @@ cp $BUILD_DIR/httpd.conf $APACHE_DIR/conf/httpd.conf
 
 #mkdir -p "/app/vendor/apache2/logs"
 
-ls -la $APACHE_DIR/usr/sbin/
-ls -la $APACHE_DIR/conf
-
 export
+
+erb "\$BUILD_DIR/httpd.conf.erb" > "\$APACHE_DIR/conf/httpd.conf"
