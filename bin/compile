@@ -45,6 +45,7 @@ cp -r $BUILD_DIR/.apt/lib /app/vendor/apache2/
 cp -r $BUILD_DIR/.apt/usr /app/vendor/apache2/
 cp -r $BUILD_DIR/.apt/var /app/vendor/apache2/
 #mkdir -p "/app/vendor/apache2/logs"
+chmod +x /app/vendor/apache2/usr/sbin/apache2
 ls -la /app/vendor/apache2/usr/sbin/
 #cp -r "$BUILD_DIR/httpd.conf" "/app/vendor/apache2/conf/httpd.conf"
 
