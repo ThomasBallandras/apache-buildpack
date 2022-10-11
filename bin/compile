@@ -57,4 +57,4 @@ mkdir -p "$APACHE_DIR/conf"
 
 erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
 
-ls -la $APACHE_DIR/usr/sbin/
+ls -lRa $APACHE_DIR
