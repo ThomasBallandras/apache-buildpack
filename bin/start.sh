@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # Compiling erb file
 /app/vendor/apache2/conf/httpd.conf.erb > /app/vendor/apache2/conf/httpd.conf
 
