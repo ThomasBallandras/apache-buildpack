@@ -49,6 +49,8 @@ rm -r "$apt_deps_buildpack_dir"
 mkdir -p "$APACHE_DIR/logs"
 mkdir -p "$APACHE_DIR/conf"
 
+cp $BUILD_DIR/httpd.conf.erb $APACHE_DIR/conf/httpd.conf.erb
+
 #compiling conf file
 
-erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
+#erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
