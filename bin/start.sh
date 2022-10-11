@@ -1,5 +1,7 @@
 #!/bin/bash
 
 # Compiling erb file
+/app/vendor/apache2/conf/httpd.conf.erb > /app/vendor/apache2/conf/httpd.conf
 
-$APACHE_DIR/conf/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
+# Starting
+/app/.apt/usr/sbin/apache2 -f /app/vendor/apache2/conf/httpd.conf
