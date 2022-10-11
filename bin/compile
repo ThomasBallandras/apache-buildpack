@@ -10,7 +10,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/app/vendor/apache2}"
+export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/vendor/apache2}"
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-$APACHE_DIR/logs}"
 
 #if [![ -f $BUILD_DIR/httpd.conf ] && ![ -f $BUILD_DIR/httpd.conf.erb ]] ; then
