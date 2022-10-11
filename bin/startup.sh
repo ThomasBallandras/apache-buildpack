@@ -13,4 +13,6 @@ echo "Starting Apache..."
 
 cat /app/vendor/apache2/logs/error_log
 
-ps -aux
+ls -la /app
+
+ls -la /app/vendor/apache2/logs
