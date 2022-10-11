@@ -5,7 +5,7 @@ set -x
 echo "compiling conf file..."
 erb /app/vendor/apache2/conf/httpd.conf.erb > /app/vendor/apache2/conf/httpd.conf
 
-#cat /app/vendor/apache2/conf/httpd.conf
+cat /app/vendor/apache2/conf/httpd.conf
 
 # Starting
 echo "Starting Apache..."
