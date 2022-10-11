@@ -51,10 +51,10 @@ mkdir -p "$APACHE_DIR/conf"
 
 cp $BUILD_DIR/httpd.conf.erb $APACHE_DIR/conf/httpd.conf.erb
 
-mkdir $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/bin
 cp $basedir/startup.sh $BUILD_DIR/bin/startup.sh
 
-mkdir $APACHE_DIR/www
+mkdir -p $APACHE_DIR/www
 cp $BUILD_DIR/index.html $APACHE_DIR/www
 
 #compiling conf file
