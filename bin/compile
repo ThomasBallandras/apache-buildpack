@@ -49,12 +49,6 @@ rm -r "$apt_deps_buildpack_dir"
 mkdir -p "$APACHE_DIR/logs"
 mkdir -p "$APACHE_DIR/conf"
 
-# copying apache to the apache2 directory
-
-#cp -R $BUILD_DIR/.apt/* $APACHE_DIR
-
 #compiling conf file
 
 erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
-
-ls -lRa $APACHE_DIR
