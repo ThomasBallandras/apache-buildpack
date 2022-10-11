@@ -57,4 +57,4 @@ cp -R $BUILD_DIR/.apt/* $APACHE_DIR
 
 erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
 
-#$APACHE_DIR/usr/sbin/apache2 -f /app/vendor/apache2/conf/httpd.conf
+ls -la $APACHE_DIR/usr/sbin/
