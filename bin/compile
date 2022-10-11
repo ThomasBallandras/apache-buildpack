@@ -10,13 +10,13 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-export APACHE_DIR="${APACHE_DIR:-/app/vendor/apache2}"
-export APACHE_LOG_DIR="${APACHE_LOG_DIR:-/app/vendor/apache2/logs}"
+export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/app/vendor/apache2}"
+export APACHE_LOG_DIR="${APACHE_LOG_DIR:-$APACHE_DIR/logs}"
 
-if [![ -f $BUILD_DIR/httpd.conf ] && ![ -f $BUILD_DIR/httpd.conf.erb ]] ; then
-  echo "No httpd.conf file found in BUILD dir! Exiting..."
-  exit 1
-fi
+#if [![ -f $BUILD_DIR/httpd.conf ] && ![ -f $BUILD_DIR/httpd.conf.erb ]] ; then
+#  echo "No httpd.conf file found in BUILD dir! Exiting..."
+#  exit 1
+#fi
 
 echo "apache2" >> $BUILD_DIR/Aptfile
 
@@ -51,7 +51,7 @@ mkdir -p "$APACHE_DIR/conf"
 
 # copying apache to the apache2 directory
 
-cp -R $BUILD_DIR/.apt/* $APACHE_DIR
+#cp -R $BUILD_DIR/.apt/* $APACHE_DIR
 
 #compiling conf file
 
