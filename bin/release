@@ -10,4 +10,4 @@ config_vars:
 EOF
 
 echo "default_process_types:"
-echo "  web: /app/bin/start.sh"
+echo "  web: /app/bin/startup.sh"
