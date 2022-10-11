@@ -51,6 +51,9 @@ mkdir -p "$APACHE_DIR/conf"
 
 cp $BUILD_DIR/httpd.conf.erb $APACHE_DIR/conf/httpd.conf.erb
 
+
+ls -lRa $BUILD_DIR
+
 #compiling conf file
 
 #erb $BUILD_DIR/httpd.conf.erb > $APACHE_DIR/conf/httpd.conf
