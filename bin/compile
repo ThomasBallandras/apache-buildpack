@@ -53,6 +53,9 @@ cp $BUILD_DIR/httpd.conf.erb $APACHE_DIR/conf/httpd.conf.erb
 
 export
 
+mkdir $BUILD_DIR/bin
+cp $basedir/startup.sh $BUILD_DIR/bin/startup.sh
+
 ls -lRa $BUILD_DIR/bin
 
 #compiling conf file
