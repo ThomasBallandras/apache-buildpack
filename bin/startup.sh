@@ -5,7 +5,7 @@ echo "compiling conf file..."
 erb $HOME/vendor/apache2/conf/httpd.conf.erb > $HOME/vendor/apache2/conf/httpd.conf
 
 #Pause for 2 sec to allow for erb command to complete
-sleep 2
+# sleep 2
 
 # Starting
 echo "Starting Apache..."
