@@ -46,13 +46,13 @@ git clone --depth=1 "$APT_BUILDPACK_URL" "$apt_deps_buildpack_dir"
 
 rm -r "$apt_deps_buildpack_dir"
 
-mkdir -p "$APACHE_DIR/logs"
-mkdir -p "$APACHE_DIR/conf"
+mkdir -p "${APACHE_DIR}/logs"
+mkdir -p "${APACHE_DIR}/conf"
 
-cp $BUILD_DIR/httpd.conf.erb $APACHE_DIR/conf/httpd.conf.erb
+cp "${basedir}/../conf/httpd.conf.erb" "${APACHE_DIR}/conf/httpd.conf.erb"
 
-mkdir -p $BUILD_DIR/bin
-cp $basedir/startup.sh $BUILD_DIR/bin/startup.sh
+mkdir -p "${BUILD_DIR}/bin"
+cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
 
-mkdir -p $APACHE_DIR/www
-cp $BUILD_DIR/index.html $APACHE_DIR/www
+mkdir -p "${APACHE_DIR}/www"
+cp "${BUILD_DIR}/index.html" "${APACHE_DIR}/www"

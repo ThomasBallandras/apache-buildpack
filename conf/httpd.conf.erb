@@ -1,0 +1,34 @@
+ServerName tb-testbp.osc-fr1.scalingo.io:<%= ENV['PORT'] %>
+ServerAdmin root@localhost
+ServerRoot <%= "#{ENV["HOME"]}/vendor/apache2" %>
+User appsdeck
+Group appsdeck
+PidFile <%= ENV["HOME"] %>/vendor/apache2/logs/apache2.pid
+
+#ServerTokens            Prod
+#UseCanonicalName        On
+#TraceEnable             Off
+
+Timeout 10
+MaxRequestWorkers 100
+
+Listen <%= ENV['PORT'] %>
+
+LoadModule mpm_event_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_mpm_event.so
+LoadModule unixd_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_unixd.so
+LoadModule access_compat_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_access_compat.so
+LoadModule dir_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_dir.so
+LoadModule log_config_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_log_config.so
+LoadModule authn_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authn_core.so
+LoadModule authz_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authz_core.so
+
+ErrorLogFormat "[%{cu}t] [%-m:%-l] %-a %-L %M"
+LogFormat               "%h %l %u [%{%Y-%m-%d %H:%M:%S}t.%{usec_frac}t] \"%r\" %>s %b \
+\"%{Referer}i\" \"%{User-Agent}i\"" combined
+
+LogLevel <%= ENV["APACHE_LOG_LEVEL"] || "debug" %>
+ErrorLog /dev/stderr
+CustomLog /dev/stdout combined
+
+DocumentRoot <%= ENV["HOME"] %>/www
+
