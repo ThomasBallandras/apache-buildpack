@@ -15,10 +15,8 @@ MaxRequestWorkers 100
 Listen <%= ENV['PORT'] %>
 
 LoadModule mpm_event_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_mpm_event.so
-LoadModule unixd_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_unixd.so
 LoadModule access_compat_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_access_compat.so
 LoadModule dir_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_dir.so
-LoadModule log_config_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_log_config.so
 LoadModule authn_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authn_core.so
 LoadModule authz_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authz_core.so
 
