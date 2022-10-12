@@ -4,7 +4,7 @@
 echo "compiling conf file..."
 erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/httpd.conf"
 
-if [ "${HOME}/apache.conf.erb" ] ; then
+if [ -f "${HOME}/apache.conf.erb" ] ; then
   erb "${HOME}/apache.conf.erb" > "${HOME}/vendor/apache2/conf/site.conf"
   echo "Include ${HOME}/vendor/apache2/conf/site.conf" >> "${HOME}/vendor/apache2/conf/httpd.conf"
 fi
