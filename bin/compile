@@ -26,20 +26,6 @@ if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   done
 fi
 
-if [ "$APACHE_MODE" = "openidc" ] ; then
-  echo "Installing Apache and mod_openidc using apt-buildpack..."
-
-  echo "libcjose0" >> $BUILD_DIR/Aptfile
-  echo "libhiredis0.14" >> $BUILD_DIR/Aptfile
-  echo "libapache2-mod-auth-openidc" >> $BUILD_DIR/Aptfile
-fi
-
-if [ "$APACHE_MODE" = "mellon" ] ; then
-  echo "Installing Apache and mod_mellon using apt-buildpack..."
-
-  echo "libapache2-mod-auth-mellon" >> $BUILD_DIR/Aptfile
-fi
-
 apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
 
 # only the name is interesting, deleting the temp empty file

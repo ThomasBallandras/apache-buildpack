@@ -7,6 +7,18 @@ If an `apache.conf.erb` is present at the root of your project, it will be
 rendered (useing ERB template system) and included in the default
 configuration.
 
+## Apache modules
+
+You can install custom apache modules by adding a `.apache-mods` file at the root
+of your project. It must include one module per line.
+
+Example:
+
+```
+auth-openidc
+auth-mellon
+```
+
 ## Environment tweaks
 
 * `APACHE_LOG_LEVEL`: (default: `info`) Define the apache log level among the following:
