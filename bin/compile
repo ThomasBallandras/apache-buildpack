@@ -53,6 +53,3 @@ cp "${basedir}/../conf/httpd.conf.erb" "${APACHE_DIR}/conf/httpd.conf.erb"
 
 mkdir -p "${BUILD_DIR}/bin"
 cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
-
-mkdir -p "${APACHE_DIR}/www"
-cp "${BUILD_DIR}/index.html" "${APACHE_DIR}/www"
