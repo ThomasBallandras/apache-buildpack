@@ -1,13 +1,9 @@
-ServerName tb-testbp.osc-fr1.scalingo.io:<%= ENV['PORT'] %>
-ServerAdmin root@localhost
+# Default configuration injected by apache-buildpack
+# See README to extend this configuration
 ServerRoot <%= "#{ENV["HOME"]}/vendor/apache2" %>
 User appsdeck
 Group appsdeck
 PidFile <%= ENV["HOME"] %>/vendor/apache2/logs/apache2.pid
-
-#ServerTokens            Prod
-#UseCanonicalName        On
-#TraceEnable             Off
 
 Timeout 10
 MaxRequestWorkers 100
@@ -20,11 +16,18 @@ LoadModule dir_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_dir.so
 LoadModule authn_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authn_core.so
 LoadModule authz_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_authz_core.so
 
+<% if File.exist?(ENV["HOME"] + "/.apache-mods") %>
+  <% File.read(ENV["HOME"] + "/.apache-mods").each_line do |mod| %>
+    <% mod_name_underscore = mod.gsub("-", "_").strip %>
+LoadModule <%= "#{mod_name_underscore}_module" %> <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_<%= mod_name_underscore %>.so
+  <% end %>
+<% end %>
+
 ErrorLogFormat "[%{cu}t] [%-m:%-l] %-a %-L %M"
 LogFormat               "%h %l %u [%{%Y-%m-%d %H:%M:%S}t.%{usec_frac}t] \"%r\" %>s %b \
 \"%{Referer}i\" \"%{User-Agent}i\"" combined
 
-LogLevel <%= ENV["APACHE_LOG_LEVEL"] || "debug" %>
+LogLevel <%= ENV["APACHE_LOG_LEVEL"] || "info" %>
 ErrorLog /dev/stderr
 CustomLog /dev/stdout combined
 

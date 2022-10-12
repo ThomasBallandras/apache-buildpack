@@ -20,6 +20,12 @@ export APACHE_LOG_DIR="${APACHE_LOG_DIR:-$APACHE_DIR/logs}"
 
 echo "apache2" >> $BUILD_DIR/Aptfile
 
+if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
+  for apache_mod in $(cat "${BUILD_DIR}/.apache-mods") ; do
+    echo "libapache2-mod-${apache_mod}" >> $BUILD_DIR/Aptfile
+  done
+fi
+
 if [ "$APACHE_MODE" = "openidc" ] ; then
   echo "Installing Apache and mod_openidc using apt-buildpack..."
 
