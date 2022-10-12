@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Compiling erb file
+# Compiling conf file
 echo "compiling conf file..."
 erb $HOME/vendor/apache2/conf/httpd.conf.erb > $HOME/vendor/apache2/conf/httpd.conf
 
