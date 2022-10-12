@@ -2,10 +2,12 @@
 
 # Compiling conf file
 echo "compiling conf file..."
-erb $HOME/vendor/apache2/conf/httpd.conf.erb > $HOME/vendor/apache2/conf/httpd.conf
+erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/httpd.conf"
 
-#Pause for 2 sec to allow for erb command to complete
-# sleep 2
+if [ "${HOME}/apache.conf.erb" ] ; then
+  erb "${HOME}/apache.conf.erb" > "${HOME}/vendor/apache2/conf/site.conf"
+  echo "Include ${HOME}/vendor/apache2/conf/site.conf" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+fi
 
 # Starting
 echo "Starting Apache..."
