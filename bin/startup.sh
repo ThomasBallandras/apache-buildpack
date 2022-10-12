@@ -11,4 +11,4 @@ fi
 
 # Starting
 echo "Starting Apache..."
-$HOME/.apt/usr/sbin/apache2 -f $HOME/vendor/apache2/conf/httpd.conf
+$HOME/.apt/usr/sbin/apache2 -f $HOME/vendor/apache2/conf/httpd.conf -DFOREGROUND
