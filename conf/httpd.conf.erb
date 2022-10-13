@@ -32,6 +32,6 @@ ErrorLog /dev/stderr
 CustomLog /dev/stdout combined
 
 <% if !File.exist?(ENV["HOME"] + "/apache.conf.erb") %>
-DocumentRoot <%= ENV["HOME"] %>/www
+  DocumentRoot <%= ENV["HOME"] %>/www
 <% end %>
 
