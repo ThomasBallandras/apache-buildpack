@@ -31,5 +31,7 @@ LogLevel <%= ENV["APACHE_LOG_LEVEL"] || "info" %>
 ErrorLog /dev/stderr
 CustomLog /dev/stdout combined
 
-# DocumentRoot <%= ENV["HOME"] %>/www
+<% if !File.exist?(ENV["HOME"] + "/apache.conf.erb") %>
+DocumentRoot <%= ENV["HOME"] %>/www
+<% end %>
 
