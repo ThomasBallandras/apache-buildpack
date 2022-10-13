@@ -19,6 +19,17 @@ auth-openidc
 auth-mellon
 ```
 
+## SSL Certificate and keys
+
+If a `ssl` directory is present at the root of the project, il will be copied over with 
+its content and made available in `${HOME}/vendor/apache2/`.
+
+For example, you may use it as such in you `apache.conf.erb` file:
+
+```
+MellonSPPrivateKeyFile ${HOME}/vendor/apache2/ssl/sp-private-key.pem
+```
+
 ## Environment tweaks
 
 * `APACHE_LOG_LEVEL`: (default: `info`) Define the apache log level among the following:
