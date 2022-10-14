@@ -46,7 +46,8 @@ MellonSPPrivateKeyFile ${HOME}/vendor/apache2/ssl/sp-private-key.pem
 ## The `apache.conf.erb` file
 
 The `apache.conf.erb` file can be used to include specific configuration for your
-environment. You may want to include variables as Ruby code in this file, which will
+environment. It should be placed at the root of your application repository.
+You may want to include variables as Ruby code in this file, which will
 match environment variables from your container.
 For example, you can create a variable `MY_VAR` in your container and use it in the
 `apache.conf.erb` file with `<%= ENV["MY_VAR"] %>`. It will be matched to the corresponding 
