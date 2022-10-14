@@ -57,6 +57,9 @@ in the `.apache-mods` file, they will autmatically be loaded in the Apache confi
 You don't need to add the corresponding `LoadModule` directive to your `apache.conf.erb` 
 file.
 
+If no `apache.conf.erb` file is found, Apache will work as a simple HTTP server and will
+serve the content of the `www` directory present on your application repository.
+
 ## Example setting up a basic OpenID-Connect Relying Party
 
 To configure Apache as an OpenID-Connect Relying Party (RP), you can create an 
