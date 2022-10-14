@@ -42,3 +42,40 @@ MellonSPPrivateKeyFile ${HOME}/vendor/apache2/ssl/sp-private-key.pem
   * `info`	Informational messages
   * `debug`	Debugging messages
   * `trace1` – `trace8` Trace messages with gradually increasing levels of detail
+
+## The `apache.conf.erb` file
+
+The `apache.conf.erb` file can be used to include specific configuration for your
+environment. You may want to include variables as Ruby code in this file, which will
+match environment variables from your container.
+For example, you can create a variable `MY_VAR` in your container and use it in the
+`apache.conf.erb` file with `<%= ENV["MY_VAR"] %>`. It will be matched to the corresponding 
+environment variable and replaced with its value before starting Apache.
+
+If you need to load modules in the Apache configuration, and these modules were included
+in the `.apache-mods` file, they will autmatically be loaded in the Apache configuration.
+You don't need to add the corresponding `LoadModule` directive to your `apache.conf.erb` 
+file.
+
+## Example setting up a basic OpenID-Connect Relying Party
+
+To configure Apache as an OpenID-Connect Relying Party (RP), you can create an 
+`apache.conf.erb` with the following code:
+
+```
+OIDCProviderMetadataURL <issuer>/.well-known/openid-configuration
+OIDCClientID <%= ENV["OIDC_CLIENT_ID"] %>
+OIDCClientSecret <%= ENV["OIDC_CLIENT_SECRET"] %>
+
+OIDCRedirectURI https://<hostname>/secure/redirect_uri
+OIDCCryptoPassphrase <%= ENV["OIDC_CRYPTO_PASSPHRASE"] %>
+
+<Location /secure>
+   AuthType openid-connect
+   Require valid-user
+</Location>
+```
+And create the following environment variables in your container:
+* `OIDC_CLIENT_ID=<client_id_value>`
+* `OIDC_CLIENT_SECRET=<client_secret_value>`
+* `OIDC_CRYPTO_PASSPHRASE=<crypto_passphrase_value>`
