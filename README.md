@@ -19,17 +19,6 @@ auth-openidc
 auth-mellon
 ```
 
-## SSL Certificate and keys
-
-If a `ssl` directory is present at the root of the project, il will be copied over with 
-its content and made available in `${HOME}/vendor/apache2/`.
-
-For example, you may use it as such in you `apache.conf.erb` file:
-
-```
-MellonSPPrivateKeyFile ${HOME}/vendor/apache2/ssl/sp-private-key.pem
-```
-
 ## Environment tweaks
 
 * `APACHE_LOG_LEVEL`: (default: `info`) Define the apache log level among the following:
@@ -83,3 +72,13 @@ And create the following environment variables in your container:
 * `OIDC_CLIENT_ID=<client_id_value>`
 * `OIDC_CLIENT_SECRET=<client_secret_value>`
 * `OIDC_CRYPTO_PASSPHRASE=<crypto_passphrase_value>`
+
+## Mellon configuration
+
+In order for auth-mellon to work, mellon needs to have a key, certificate and metadata file available.
+You can generate the files accordingly:
+* Run the `mellon_create_metadata.sh` script, passing it the entity-id and endpoint-path as parameters
+* 3 files will be created. For each file, run the command: `base64 --wrap 0 <file_name>`
+* Create the environment variables `MELLON_SP_KEY`, `MELLON_SP_CERT` and `MELLON_SP_METADATA` and paste the corresponding value returned by the above command.
+
+You will also need to run the `base64 --wrap 0 <file_name>` against the Identity Provider metadata file and copy-paste the returned value into a `MELLON_IDP_METADATA` environment variable.
