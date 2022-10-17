@@ -9,11 +9,6 @@ if [ -f "${HOME}/apache.conf.erb" ] ; then
   echo "Include ${HOME}/vendor/apache2/conf/site.conf" >> "${HOME}/vendor/apache2/conf/httpd.conf"
 fi
 
-# Adding SSL directory in case SSL is required
-if [ -d "${HOME}/ssl" ] ; then
-  cp -r "${HOME}/ssl" "${HOME}/vendor/apache2/"
-fi
-
 # Starting
 echo "Starting Apache..."
 $HOME/.apt/usr/sbin/apache2 -f $HOME/vendor/apache2/conf/httpd.conf -DFOREGROUND
