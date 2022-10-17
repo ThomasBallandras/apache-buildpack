@@ -82,3 +82,13 @@ You can generate the files accordingly:
 * Create the environment variables `MELLON_SP_KEY`, `MELLON_SP_CERT` and `MELLON_SP_METADATA` and paste the corresponding value returned by the above command.
 
 You will also need to run the `base64 --wrap 0 <file_name>` against the Identity Provider metadata file and copy-paste the returned value into a `MELLON_IDP_METADATA` environment variable.
+
+You can then set these files in your Mellon configuration, as such:
+```
+[...]
+MellonSPMetadataFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon.xml
+MellonSPPrivateKeyFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon.key
+MellonSPCertFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon.cert
+MellonIdPMetadataFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon_idp_metadata.xml
+[...]
+```
