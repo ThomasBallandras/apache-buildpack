@@ -13,11 +13,6 @@ ENV_DIR=$3
 export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/vendor/apache2}"
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-$APACHE_DIR/logs}"
 
-#if [![ -f $BUILD_DIR/httpd.conf ] && ![ -f $BUILD_DIR/httpd.conf.erb ]] ; then
-#  echo "No httpd.conf file found in BUILD dir! Exiting..."
-#  exit 1
-#fi
-
 echo "apache2" >> $BUILD_DIR/Aptfile
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
@@ -45,3 +40,41 @@ cp "${basedir}/../conf/httpd.conf.erb" "${APACHE_DIR}/conf/httpd.conf.erb"
 
 mkdir -p "${BUILD_DIR}/bin"
 cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
+
+if grep -q "auth-mellon" "${BUILD_DIR}/.apache-mods" ; then
+  
+  export MELLON_DIR="${MELLON_DIR:-$APACHE_DIR/mellon}"
+  mkdir -p "${MELLON_DIR}"
+
+  if [[ ( ! -f "${ENV_DIR}/MELLON_SP_METADATA" ) ]]; then
+    echo "WARNING: MELLON_SP_METADATA is not set. Mellon may not work!"
+  else
+    echo "Exporting xml matadata file..."
+    cat "${ENV_DIR}/MELLON_SP_METADATA" | base64 --decode >> "${MELLON_DIR}/mellon.xml"
+    chmod 644 ${MELLON_DIR}/mellon.xml
+  fi
+
+  if [[ ( ! -f "${ENV_DIR}/MELLON_SP_CERT" ) ]]; then
+    echo "WARNING: MELLON_SP_CERT is not set. Mellon may not work!"
+  else
+    echo "Exporting certificate file..."
+    cat "${ENV_DIR}/MELLON_SP_CERT" | base64 --decode >> "${MELLON_DIR}/mellon.cert"
+    chmod 644 ${MELLON_DIR}/mellon.cert
+  fi
+
+  if [[ ( ! -f "${ENV_DIR}/MELLON_SP_KEY" ) ]]; then
+    echo "WARNING: MELLON_SP_KEY is not set. Mellon may not work!"
+  else
+    echo "Exporting key file..."
+    cat "${ENV_DIR}/MELLON_SP_KEY" | base64 --decode >> "${MELLON_DIR}/mellon.key"
+    chmod 600 ${MELLON_DIR}/mellon.key
+  fi
+
+  if [[ ( ! -f "${ENV_DIR}/MELLON_IDP_METADATA" ) ]]; then
+    echo "WARNING: MELLON_IDP_METADATA is not set. Mellon may not work!"
+  else
+    echo "Exporting IdP xml metadata file..."
+    cat "${ENV_DIR}/MELLON_IDP_METADATA" | base64 --decode >> "${MELLON_DIR}/mellon_idp_metadata.xml"
+    chmod 644 ${MELLON_DIR}/mellon_idp_metadata.xml
+  fi
+fi
