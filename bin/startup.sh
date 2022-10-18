@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setting Mellon key, cert and metadata files
-if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
+if grep -q "libapache2-mod-auth-mellon" "${HOME}/.apache-mods" ; then
   
   export APACHE_DIR="${APACHE_DIR:-$HOME/vendor/apache2}"
   export MELLON_DIR="${MELLON_DIR:-$APACHE_DIR/mellon}"
@@ -12,7 +12,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
   else
     echo "Exporting xml matadata file..."
     echo "${MELLON_SP_METADATA}" | base64 --decode >> "${MELLON_DIR}/mellon.xml"
-    chmod 644 ${MELLON_DIR}/mellon.xml
+    chmod 644 "${MELLON_DIR}/mellon.xml"
   fi
 
   if [[ -z "${MELLON_SP_CERT}" ]]; then
@@ -20,7 +20,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
   else
     echo "Exporting certificate file..."
     echo "${MELLON_SP_CERT}" | base64 --decode >> "${MELLON_DIR}/mellon.cert"
-    chmod 644 ${MELLON_DIR}/mellon.cert
+    chmod 644 "${MELLON_DIR}/mellon.cert"
   fi
 
   if [[ -z "${MELLON_SP_KEY}" ]]; then
@@ -28,7 +28,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
   else
     echo "Exporting key file..."
     echo "${MELLON_SP_KEY}" | base64 --decode >> "${MELLON_DIR}/mellon.key"
-    chmod 600 ${MELLON_DIR}/mellon.key
+    chmod 600 "${MELLON_DIR}/mellon.key"
   fi
 
   if [[ -z "${MELLON_IDP_METADATA}" ]]; then
@@ -36,7 +36,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
   else
     echo "Exporting IdP xml metadata file..."
     echo "${MELLON_IDP_METADATA}" | base64 --decode >> "${MELLON_DIR}/mellon_idp_metadata.xml"
-    chmod 644 ${MELLON_DIR}/mellon_idp_metadata.xml
+    chmod 644 "${MELLON_DIR}/mellon_idp_metadata.xml"
   fi
 fi
 
@@ -51,4 +51,4 @@ fi
 
 # Starting
 echo "Starting Apache..."
-$HOME/.apt/usr/sbin/apache2 -f $HOME/vendor/apache2/conf/httpd.conf -DFOREGROUND
+"$HOME"/.apt/usr/sbin/apache2 -f "$HOME"/vendor/apache2/conf/httpd.conf -DFOREGROUND
