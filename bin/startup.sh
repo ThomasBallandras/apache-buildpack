@@ -7,7 +7,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
   export MELLON_DIR="${MELLON_DIR:-$APACHE_DIR/mellon}"
   mkdir -p "${MELLON_DIR}"
 
-  if [[ ( ! -n "${MELLON_SP_METADATA}" ) ]]; then
+  if [[ -z "${MELLON_SP_METADATA}" ]]; then
     echo "WARNING: MELLON_SP_METADATA is not set. Mellon may not work!"
   else
     echo "Exporting xml matadata file..."
@@ -15,7 +15,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
     chmod 644 ${MELLON_DIR}/mellon.xml
   fi
 
-  if [[ ( ! -n "${MELLON_SP_CERT}" ) ]]; then
+  if [[ -z "${MELLON_SP_CERT}" ]]; then
     echo "WARNING: MELLON_SP_CERT is not set. Mellon may not work!"
   else
     echo "Exporting certificate file..."
@@ -23,7 +23,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
     chmod 644 ${MELLON_DIR}/mellon.cert
   fi
 
-  if [[ ( ! -n "${MELLON_SP_KEY}" ) ]]; then
+  if [[ -z "${MELLON_SP_KEY}" ]]; then
     echo "WARNING: MELLON_SP_KEY is not set. Mellon may not work!"
   else
     echo "Exporting key file..."
@@ -31,7 +31,7 @@ if grep -q "libapache2-mod-auth-mellon" "${HOME}/Aptfile" ; then
     chmod 600 ${MELLON_DIR}/mellon.key
   fi
 
-  if [[ ( ! -n "${MELLON_IDP_METADATA}" ) ]]; then
+  if [[ -z "${MELLON_IDP_METADATA}" ]]; then
     echo "WARNING: MELLON_IDP_METADATA is not set. Mellon may not work!"
   else
     echo "Exporting IdP xml metadata file..."
