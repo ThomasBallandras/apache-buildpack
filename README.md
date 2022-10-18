@@ -84,7 +84,7 @@ And create the following environment variables in your container:
 
 In order for auth-mellon to work, mellon needs to have a key, certificate and metadata file available.
 You can generate the files accordingly:
-* Dowload and run the `mellon_create_metadata.sh` script from https://github.com/latchset/mod_auth_mellon, passing it the entity-id and endpoint-path as parameters
+* Run the `tools/mellon_create_metadata.sh` script, passing it the entity-id and endpoint-path as parameters
 * 3 files will be created. For each file, run the command: `base64 --wrap 0 <file_name>`
 * Create the environment variables `MELLON_SP_KEY`, `MELLON_SP_CERT` and `MELLON_SP_METADATA` and paste the corresponding value returned by the above command.
 
