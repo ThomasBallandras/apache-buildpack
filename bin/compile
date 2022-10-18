@@ -13,11 +13,6 @@ ENV_DIR=$3
 export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/vendor/apache2}"
 export APACHE_LOG_DIR="${APACHE_LOG_DIR:-$APACHE_DIR/logs}"
 
-#if [![ -f $BUILD_DIR/httpd.conf ] && ![ -f $BUILD_DIR/httpd.conf.erb ]] ; then
-#  echo "No httpd.conf file found in BUILD dir! Exiting..."
-#  exit 1
-#fi
-
 echo "apache2" >> $BUILD_DIR/Aptfile
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
