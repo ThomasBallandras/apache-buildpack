@@ -44,6 +44,20 @@ fi
 echo "compiling conf file..."
 erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/httpd.conf"
 
+# Setting MaxRequestWorkers value according to the container size. Formula: total_mem / apache_process_mem_used (roughly 12mb)
+case "${CONTAINER_SIZE}" in
+  "S" ) echo "MaxRequestWorkers 21" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  ;;
+  "M" ) echo "MaxRequestWorkers 42" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  ;;
+  "L" ) echo "MaxRequestWorkers 84" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  ;;
+  "XL" ) echo "MaxRequestWorkers 168" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  ;;
+  "2XL" ) echo "MaxRequestWorkers 336" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  ;;
+esac
+
 if [ -f "${HOME}/apache.conf.erb" ] ; then
   erb "${HOME}/apache.conf.erb" > "${HOME}/vendor/apache2/conf/site.conf"
   
