@@ -46,21 +46,16 @@ erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/
 
 if [ -f "${HOME}/apache.conf.erb" ] ; then
   erb "${HOME}/apache.conf.erb" > "${HOME}/vendor/apache2/conf/site.conf"
+  
+  # Testing if /app or /app/vendor are set in the DocumentRoot (insecure)
+  if [[ -n $(grep -i 'DocumentRoot' "${HOME}/vendor/apache2/conf/site.conf" | grep -E '( '"${HOME}"'| '"${HOME}"'/vendor)') ]]; then
+	  echo "ERROR: DocumentRoot should never be set to /app! Exiting..."
+    exit 1
+  fi
+
   echo "Include ${HOME}/vendor/apache2/conf/site.conf" >> "${HOME}/vendor/apache2/conf/httpd.conf"
-fi
-
-if grep -i 'DocumentRoot' "${HOME}/vendor/apache2/conf/site.conf" | grep -e '/app$'
-  then
-    echo "ERROR: DocumentRoot should never be set to /app! Exiting..."
-    exit 1
-fi
-
-if grep -i 'DocumentRoot' "${HOME}/vendor/apache2/conf/site.conf" | grep -e '/app/vendor'
-  then
-    echo "ERROR: DocumentRoot should never be set to /app/vendor! Exiting..."
-    exit 1
 fi
 
 # Starting
 echo "Starting Apache..."
-"$HOME"/.apt/usr/sbin/apache2 -f "$HOME"/vendor/apache2/conf/httpd.conf -DFOREGROUND
+"${HOME}"/.apt/usr/sbin/apache2 -f "${HOME}"/vendor/apache2/conf/httpd.conf -DFOREGROUND
