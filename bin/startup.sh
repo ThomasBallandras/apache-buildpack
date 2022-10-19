@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setting Mellon key, cert and metadata files
-if grep -q "libapache2-mod-auth-mellon" "${HOME}/.apache-mods" ; then
+if grep -q "auth-mellon" "${HOME}/.apache-mods" ; then
   
   export APACHE_DIR="${APACHE_DIR:-$HOME/vendor/apache2}"
   export MELLON_DIR="${MELLON_DIR:-$APACHE_DIR/mellon}"
