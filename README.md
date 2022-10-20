@@ -13,8 +13,8 @@ You can install custom apache modules by adding a `.apache-mods` file at the roo
 of your project. It must include one module per line.
 The list of modules available, with a short description of each module, is available at 
 the following locations depending on the version of the stack used:
-* Stack ubuntu-20: https://packages.ubuntu.com/search?suite=focal&searchon=names&keywords=libapache2-mod
-* Stack ubuntu-18: https://packages.ubuntu.com/search?suite=bionic&searchon=names&keywords=libapache2-mod
+* Stack `scalingo-20`: https://packages.ubuntu.com/search?suite=focal&searchon=names&keywords=libapache2-mod
+* Stack `scalingo-18`: https://packages.ubuntu.com/search?suite=bionic&searchon=names&keywords=libapache2-mod
 
 Please note you only need to pass the module name inside the `.apache-mods` file, 
 dropping the `libapache2-mod-` part.

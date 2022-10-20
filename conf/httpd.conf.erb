@@ -5,6 +5,7 @@ User appsdeck
 Group appsdeck
 PidFile <%= ENV["HOME"] %>/vendor/apache2/logs/apache2.pid
 
+# Timeout set to Scalingo's timeout (60 sec) minus 1 sec
 Timeout 59
 
 Listen <%= ENV['PORT'] %>
