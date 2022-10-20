@@ -3,6 +3,7 @@
 # Setting Mellon key, cert and metadata files
 if grep -q "auth-mellon" "${HOME}/.apache-mods" ; then
   
+  export APACHE_WORKER_SIZE="${APACHE_WORKER_SIZE:="30"}"
   export APACHE_DIR="${APACHE_DIR:-$HOME/vendor/apache2}"
   export MELLON_DIR="${MELLON_DIR:-$APACHE_DIR/mellon}"
   mkdir -p "${MELLON_DIR}"
@@ -46,15 +47,15 @@ erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/
 
 # Setting MaxRequestWorkers value according to the container size. Formula: total_mem / apache_process_mem_used (roughly 12mb)
 case "${CONTAINER_SIZE}" in
-  "S" ) echo "MaxRequestWorkers 21" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  "S" ) echo "MaxRequestWorkers " $(echo "256 / $APACHE_WORKER_SIZE" | bc) >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "M" ) echo "MaxRequestWorkers 42" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  "M" ) echo "MaxRequestWorkers " $(echo "512 / $APACHE_WORKER_SIZE" | bc) >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "L" ) echo "MaxRequestWorkers 84" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  "L" ) echo "MaxRequestWorkers " $(echo "1024 / $APACHE_WORKER_SIZE" | bc) >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "XL" ) echo "MaxRequestWorkers 168" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  "XL" ) echo "MaxRequestWorkers " $(echo "2048 / $APACHE_WORKER_SIZE" | bc) >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "2XL" ) echo "MaxRequestWorkers 336" >> "${HOME}/vendor/apache2/conf/httpd.conf"
+  "2XL" ) echo "MaxRequestWorkers " $(echo "4096 / $APACHE_WORKER_SIZE" | bc) >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
 esac
 
