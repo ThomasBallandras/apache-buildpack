@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/Scalingo/apache-buildpack/1c1e05f53f1d611e0dd2141bd8a49a7fa6cebcbe/scalingo_apache.svg?raw=true)
+
 # Apache BuildPack
 This BuildPack will install the Apache2 web server using the apt-buildpack.
 
