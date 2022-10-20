@@ -84,7 +84,7 @@ if [ -f "${HOME}/apache.conf.erb" ] ; then
   erb "${HOME}/apache.conf.erb" > "${HOME}/vendor/apache2/conf/site.conf"
   
   # Testing if /app or /app/vendor are set in the DocumentRoot (insecure)
-  if [[ -n $(grep -i 'DocumentRoot' "${HOME}/vendor/apache2/conf/site.conf" | grep -E '( '"${HOME}"$'| '"${HOME}"'/vendor') ]]; then
+  if [[ -n $(grep -i 'DocumentRoot' "${HOME}/vendor/apache2/conf/site.conf" | grep -E '( '"${HOME}"$'| '"${HOME}"'/vendor)') ]]; then
 	  echo "ERROR: DocumentRoot should never be set to /app! Exiting..."
     exit 1
   fi
