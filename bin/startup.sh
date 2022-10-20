@@ -48,31 +48,31 @@ erb "${HOME}/vendor/apache2/conf/httpd.conf.erb" > "${HOME}/vendor/apache2/conf/
 
 # Setting MaxRequestWorkers value according to the container size. Formula: total_mem / apache_process_mem_used (roughly 12mb)
 case "${CONTAINER_SIZE}" in
-  "S" ) SERVER_LIMIT="$(echo "256 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "S" ) SERVER_LIMIT="$(echo "256 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "M" ) SERVER_LIMIT="$(echo "512 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "M" ) SERVER_LIMIT="$(echo "512 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "L" ) SERVER_LIMIT="$(echo "1024 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "L" ) SERVER_LIMIT="$(echo "1024 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "XL" ) SERVER_LIMIT="$(echo "2048 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "XL" ) SERVER_LIMIT="$(echo "2048 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "2XL" ) SERVER_LIMIT="$(echo "4096 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "2XL" ) SERVER_LIMIT="$(echo "4096 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "3XL" ) SERVER_LIMIT="$(echo "8192 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "3XL" ) SERVER_LIMIT="$(echo "8192 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;
-  "4XL" ) SERVER_LIMIT="$(echo "16384 / $APACHE_WORKER_SIZE" | "${HOME}/.apt/usr/bin/bc")"
+  "4XL" ) SERVER_LIMIT="$(echo "16384 / ${APACHE_WORKER_SIZE}" | "${HOME}/.apt/usr/bin/bc")"
   echo "ServerLimit " "${SERVER_LIMIT}" >> "${HOME}/vendor/apache2/conf/httpd.conf"
   echo "MaxRequestWorkers " $(echo "${SERVER_LIMIT} * ${APACHE_THREADS_PER_CHILD}" | "${HOME}/.apt/usr/bin/bc") >> "${HOME}/vendor/apache2/conf/httpd.conf"
   ;;

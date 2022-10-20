@@ -107,7 +107,8 @@ The table belows lists all the vairables you can set, and a description of each.
 | Var Name | Module | Default | Description |
 |----------|:------:|:-------:|-------------|
 | APACHE_LOG_LEVEL | General | info | Sets the Apache log level. |
-| APACHE_WORKER_SIZE | General | 30 | Sets the average Apache process size, in Mb. Used to calculate MaxRequestWorkers. |
+| APACHE_WORKER_SIZE | General | 10 | Sets the average Apache process size, in Mb. Used to calculate ServerLimit and MaxRequestWorkers. |
+| APACHE_THREADS_PER_CHILD | General | 25 | Sets the number of threads per child. Used to calculate MaxRequestWorkers. |
 | MELLON_SP_KEY | auth-mellon | none | Used to set the Mellon Service Provider key. Should be the key converted to base64. |
 | MELLON_SP_CERT | auth-mellon | none | Used to set the Mellon Service Provider certificate. Should be the certificate converted to base64. |
 | MELLON_SP_METADATA | auth-mellon | none | Used to set the Mellon Service Provider metadata xml file. Should be the xml file converted to base64. |
