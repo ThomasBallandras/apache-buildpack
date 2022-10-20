@@ -15,7 +15,7 @@ export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/vendor/apache2}"
 echo "apache2" >> "$BUILD_DIR/Aptfile"
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
-  grep -v -e '^$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
+  grep -E '^[a-z-]+$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
     echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
   done
 fi

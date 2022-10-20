@@ -18,6 +18,7 @@ LoadModule authz_core_module <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod
 
 <% if File.exist?(ENV["HOME"] + "/.apache-mods") %>
   <% File.read(ENV["HOME"] + "/.apache-mods").each_line do |mod| %>
+    <% next if !mod.match?(/^[a-z-]+$/) %>
     <% mod_name_underscore = mod.gsub("-", "_").strip %>
 LoadModule <%= "#{mod_name_underscore}_module" %> <%= ENV["HOME"] %>/.apt/usr/lib/apache2/modules/mod_<%= mod_name_underscore %>.so
   <% end %>

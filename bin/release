@@ -3,5 +3,8 @@
 
 BUILD_DIR=$1
 
-echo "default_process_types:"
-echo "  web: /app/bin/startup.sh"
+cat <<EOF
+---
+default_process_types:
+  web: /app/bin/startup.sh
+EOF
