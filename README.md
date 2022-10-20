@@ -11,6 +11,13 @@ configuration.
 
 You can install custom apache modules by adding a `.apache-mods` file at the root
 of your project. It must include one module per line.
+The list of modules available, with a short description of each module, is available at 
+the following locations depending on the version of the stack used:
+* Stack `scalingo-20`: https://packages.ubuntu.com/search?suite=focal&searchon=names&keywords=libapache2-mod
+* Stack `scalingo-18`: https://packages.ubuntu.com/search?suite=bionic&searchon=names&keywords=libapache2-mod
+
+Please note you only need to pass the module name inside the `.apache-mods` file, 
+dropping the `libapache2-mod-` part.
 
 Example:
 
@@ -77,7 +84,7 @@ And create the following environment variables in your container:
 
 In order for auth-mellon to work, mellon needs to have a key, certificate and metadata file available.
 You can generate the files accordingly:
-* Dowload and run the `mellon_create_metadata.sh` script from https://github.com/latchset/mod_auth_mellon, passing it the entity-id and endpoint-path as parameters
+* Run the `tools/mellon_create_metadata.sh` script, passing it the entity-id and endpoint-path as parameters
 * 3 files will be created. For each file, run the command: `base64 --wrap 0 <file_name>`
 * Create the environment variables `MELLON_SP_KEY`, `MELLON_SP_CERT` and `MELLON_SP_METADATA` and paste the corresponding value returned by the above command.
 
@@ -92,3 +99,18 @@ MellonSPCertFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon.cert
 MellonIdPMetadataFile <%= ENV["HOME"] %>/vendor/apache2/mellon/mellon_idp_metadata.xml
 [...]
 ```
+
+## Variables
+
+The table belows lists all the vairables you can set, and a description of each.
+
+| Var Name | Module | Default | Description |
+|----------|:------:|:-------:|-------------|
+| APACHE_LOG_LEVEL | General | info | Sets the Apache log level. |
+| APACHE_WORKER_SIZE | General | 10 | Sets the average Apache process size, in Mb. Used to calculate ServerLimit and MaxRequestWorkers. |
+| APACHE_THREADS_PER_CHILD | General | 25 | Sets the number of threads per child. Used to calculate MaxRequestWorkers. |
+| MELLON_SP_KEY | auth-mellon | none | Used to set the Mellon Service Provider key. Should be the key converted to base64. |
+| MELLON_SP_CERT | auth-mellon | none | Used to set the Mellon Service Provider certificate. Should be the certificate converted to base64. |
+| MELLON_SP_METADATA | auth-mellon | none | Used to set the Mellon Service Provider metadata xml file. Should be the xml file converted to base64. |
+| MELLON_IDP_METADATA | auth-mellon | none | Used to set the Mellon Identity Provider metadata xml file. Should be the xml file converted to base64. |
+| YOUR_KEY | any | none | You can set your own variables inside the apache.conf.erb file. Use string `<%= ENV["YOUR_KEY"] %>` inside apache.conf.erb. |
