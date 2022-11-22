@@ -92,6 +92,11 @@ You can generate the files accordingly:
 
 You will also need to run the `base64 --wrap 0 <file_name>` against the Identity Provider metadata file and copy-paste the returned value into a `MELLON_IDP_METADATA` environment variable.
 
+Sometimes, the `MELLON_IDP_METADATA` variable will exceed the maximum allowed size of 8192 characters. In that case, you can:
+* Put the **mellon_idp_metadata.xml** file inside a password-protected **mellon_idp_metadata.zip** file (**NOTE: Please respect the files names!**)
+* Add a `MELLON_IDP_PASSPHRASE` environment variable containing the **base64** value of the password needed to unzip the file
+
+
 You can then set these files in your Mellon configuration, as such:
 ```
 [...]
@@ -115,4 +120,5 @@ The table belows lists all the vairables you can set, and a description of each.
 | MELLON_SP_CERT | auth-mellon | none | Used to set the Mellon Service Provider certificate. Should be the certificate converted to base64. |
 | MELLON_SP_METADATA | auth-mellon | none | Used to set the Mellon Service Provider metadata xml file. Should be the xml file converted to base64. |
 | MELLON_IDP_METADATA | auth-mellon | none | Used to set the Mellon Identity Provider metadata xml file. Should be the xml file converted to base64. |
+| MELLON_IDP_PASSPHRASE | auth-mellon | none | Used to set the passphrase to decrypt Mellon Identity Provider metadata xml file. Should be the passphrase converted to base64. |
 | YOUR_KEY | any | none | You can set your own variables inside the apache.conf.erb file. Use string `<%= ENV["YOUR_KEY"] %>` inside apache.conf.erb. |
