@@ -35,7 +35,14 @@ if grep -q "auth-mellon" "${HOME}/.apache-mods" ; then
   fi
 
   if [[ -z "${MELLON_IDP_METADATA}" ]]; then
-    echo "WARNING: MELLON_IDP_METADATA is not set. Mellon may not work!"
+    echo "MELLON_IDP_METADATA is not set. Checking for MELLON_IDP_PASSPHRASE... "
+    if [[ -z "${MELLON_IDP_PASSPHRASE}" ]]; then
+      echo "Neither MELLON_IDP_METADATA nor MELLON_IDP_PASSPHRASE are set. Mellon may not work! "
+    else
+      echo "Importing IdP xml metadata file..."
+      unzip -P $( echo "${MELLON_IDP_PASSPHRASE}" | base64 --decode ) -d "${MELLON_DIR}" "${HOME}/mellon_idp_metadata.zip"
+      chmod 644 "${MELLON_DIR}/mellon_idp_metadata.xml"
+    fi
   else
     echo "Exporting IdP xml metadata file..."
     echo "${MELLON_IDP_METADATA}" | base64 --decode >> "${MELLON_DIR}/mellon_idp_metadata.xml"
