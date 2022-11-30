@@ -16,7 +16,13 @@ echo "apache2" >> "$BUILD_DIR/Aptfile"
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   grep -E '^[a-z-]+$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
-    echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
+    if [ "$apache_mod" = "clamav" ] ; then
+      echo "clamav" >> "$BUILD_DIR/Aptfile"
+      echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
+      echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
+    else
+      echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
+    fi
   done
 fi
 
@@ -39,3 +45,12 @@ cp "${basedir}/../conf/httpd.conf.erb" "${APACHE_DIR}/conf/httpd.conf.erb"
 
 mkdir -p "${BUILD_DIR}/bin"
 cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
+
+if grep -q "clamav" "${HOME}/.apache-mods" ; then
+  curl -L http://software.othello.ch/mod_clamav/mod_clamav-0.23.tar.gz --output ${CACHE_DIR}/mod_clamav.tar.gz
+  tar -xzf ${CACHE_DIR}/mod_clamav.tar.gz -C ${CACHE_DIR}
+  cd ${CACHE_DIR}/mod_clamav-0.23
+  ${CACHE_DIR}/configure --with-apache=${APACHE_DIR}
+  make
+  make install
+fi
