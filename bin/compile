@@ -50,7 +50,7 @@ if grep -q "clamav" "${HOME}/.apache-mods" ; then
   curl -L http://software.othello.ch/mod_clamav/mod_clamav-0.23.tar.gz --output ${CACHE_DIR}/mod_clamav.tar.gz
   tar -xzf ${CACHE_DIR}/mod_clamav.tar.gz -C ${CACHE_DIR}
   cd ${CACHE_DIR}/mod_clamav-0.23
-  ${CACHE_DIR}/configure --with-apache=${APACHE_DIR}
+  ./configure --with-apache=${APACHE_DIR}
   make
   make install
 fi
