@@ -17,11 +17,9 @@ echo "apache2" >> "$BUILD_DIR/Aptfile"
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   grep -E '^[a-z-]+$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
     if [ "$apache_mod" = "clamav" ] ; then
-      echo "apache2-dev" >> "$BUILD_DIR/Aptfile"
       echo "clamav" >> "$BUILD_DIR/Aptfile"
       echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
       echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
-      echo "libclamav-dev" >> "$BUILD_DIR/Aptfile"
     else
       echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
     fi
@@ -49,10 +47,7 @@ mkdir -p "${BUILD_DIR}/bin"
 cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
 
 if grep -q "clamav" "${HOME}/.apache-mods" ; then
-  curl -L http://software.othello.ch/mod_clamav/mod_clamav-0.23.tar.gz --output ${CACHE_DIR}/mod_clamav.tar.gz
-  tar -xzf ${CACHE_DIR}/mod_clamav.tar.gz -C ${CACHE_DIR}
-  cd ${CACHE_DIR}/mod_clamav-0.23
-  ./configure --with-apxs=${HOME}/.apt/usr/bin/apxs
-  make
-  make install
+  mkdir -p "${APACHE_DIR}/modsec"
+  cp "${basedir}/../clamav/modsec_clamav.pl" "${APACHE_DIR}/mosec/modsec_clamav.pl"
+  cp "${basedir}/../clamav/modsec_clamav.conf" "${APACHE_DIR}/mosec/modsec_clamav.conf"
 fi
