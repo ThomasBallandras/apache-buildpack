@@ -24,6 +24,7 @@ if [[ -n "${CLAMAV}" ]] ; then
   echo "clamav" >> "$BUILD_DIR/Aptfile"
   echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
   echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
+  echo "libapache2-mod-security2" >> "$BUILD_DIR/Aptfile"
 fi
 
 apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
