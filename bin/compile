@@ -20,7 +20,7 @@ if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   done
 fi
 
-if [[ -n "${CLAMAV}" ]]; then
+if [[ -n "${CLAMAV}" ]] ; then
   echo "clamav" >> "$BUILD_DIR/Aptfile"
   echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
   echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
@@ -46,7 +46,7 @@ cp "${basedir}/../conf/httpd.conf.erb" "${APACHE_DIR}/conf/httpd.conf.erb"
 mkdir -p "${BUILD_DIR}/bin"
 cp "${basedir}/startup.sh" "${BUILD_DIR}/bin/startup.sh"
 
-if grep -q "clamav" "${HOME}/.apache-mods" ; then
+if [[ -n "${CLAMAV}" ]] ; then
   mkdir -p "${APACHE_DIR}/modsec"
   cp "${basedir}/../clamav/modsec_clamav.pl" "${APACHE_DIR}/modsec/modsec_clamav.pl"
   cp "${basedir}/../clamav/modsec_clamav.conf" "${APACHE_DIR}/modsec/modsec_clamav.conf"
