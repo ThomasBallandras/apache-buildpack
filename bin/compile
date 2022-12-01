@@ -12,7 +12,7 @@ ENV_DIR=$3
 
 export APACHE_DIR="${APACHE_DIR:-$BUILD_DIR/vendor/apache2}"
 
-echo "apache2" >> "$BUILD_DIR/Aptfile"
+echo "apache2" > "$BUILD_DIR/Aptfile"
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   grep -E '^[a-z-]+$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
