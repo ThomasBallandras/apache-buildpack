@@ -16,14 +16,14 @@ echo "apache2" >> "$BUILD_DIR/Aptfile"
 
 if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
   grep -E '^[a-z-]+$' < "${BUILD_DIR}/.apache-mods" | while IFS= read -r apache_mod ; do
-    if [ "$apache_mod" = "clamav" ] ; then
-      echo "clamav" >> "$BUILD_DIR/Aptfile"
-      echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
-      echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
-    else
-      echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
-    fi
+    echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
   done
+fi
+
+if [[ -n "${CLAMAV}" ]]; then
+  echo "clamav" >> "$BUILD_DIR/Aptfile"
+  echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
+  echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
 fi
 
 apt_deps_buildpack_dir=$(mktemp apt_buildpack_XXXX)
