@@ -21,6 +21,7 @@ if [ -f "${BUILD_DIR}/.apache-mods" ] ; then
       echo "clamav" >> "$BUILD_DIR/Aptfile"
       echo "clamav-daemon" >> "$BUILD_DIR/Aptfile"
       echo "clamav-freshclam" >> "$BUILD_DIR/Aptfile"
+      echo "libclamav-dev" >> "$BUILD_DIR/Aptfile"
     else
       echo "libapache2-mod-${apache_mod}" >> "$BUILD_DIR/Aptfile"
     fi
